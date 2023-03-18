@@ -44,9 +44,10 @@ CLI References:
 - [gcloud scheduler jobs update http](https://cloud.google.com/sdk/gcloud/reference/scheduler/jobs/update/http)
 
 Some things to note:
-- The scheduler job uses [OAuth](https://en.wikipedia.org/wiki/OAuth) to authenticate in order to run the workflow, whereas the workflow steps use [OIDC (OpenID Connect)](https://en.wikipedia.org/wiki/OpenID#OpenID_Connect_(OIDC)) to authenticate in order to call the functions. The documentation specifies in several places (such as [here](https://cloud.google.com/sdk/gcloud/reference/scheduler/jobs/create/http#--oauth-service-account-email) in the `gcloud scheduler jobs create http` documentation) that the OAuth should be used "if the target is a Google APIs service with URL `*.googleapis.com`", whereas OIDC is "generally used *except* for Google APIs hosted on `*.googleapis.com`".
+- The scheduler job uses [OAuth](https://en.wikipedia.org/wiki/OAuth) to authenticate in order to run the workflow, whereas the workflow steps use [OIDC (OpenID Connect)](https://en.wikipedia.org/wiki/OpenID#OpenID_Connect_(OIDC)) to authenticate in order to call the functions. The documentation specifies in several places (such as [here](https://cloud.google.com/sdk/gcloud/reference/scheduler/jobs/create/http#--oauth-service-account-email) in the `gcloud scheduler jobs create http` documentation) that OAuth should be used "if the target is a Google APIs service with URL `*.googleapis.com`", whereas OIDC is "generally used *except* for Google APIs hosted on `*.googleapis.com`".
 - The service account should have the appropriate roles to be able to:
   - Invoke functions
   - Invoke workflows
   - Read and write data in storage buckets
+  
 **TODO: Update with specific documentation on which roles are needed**
