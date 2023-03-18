@@ -1,6 +1,6 @@
 ## Deploying pipelines
 
-For a pipeline, you'll have to create a few types of recources in Google Cloud:
+For a pipeline, you'll have to create a few types of resources in Google Cloud:
 1.  The individual functions that will be run as part of the pipeline
 2.  The workflow that will orchestrate the functions
 3.  A scheduler job that will trigger the workflow
