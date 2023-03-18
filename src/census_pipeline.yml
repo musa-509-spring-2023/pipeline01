@@ -1,0 +1,14 @@
+main:
+    steps:
+    - extract:
+        call: http.post
+        args:
+            url: https://us-central1-musa-344004.cloudfunctions.net/extract-census
+            auth:
+                type: OIDC
+    - prepare:
+        call: http.post
+        args:
+            url: https://us-central1-musa-344004.cloudfunctions.net/prepare-census
+            auth:
+                type: OIDC
