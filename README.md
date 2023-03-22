@@ -23,6 +23,14 @@ gcloud functions deploy prepare-census \
   --trigger-http \
   --service-account data-pipeline-user@musa-344004.iam.gserviceaccount.com
 
+gcloud functions deploy load-census \
+  --source src/load_census \
+  --entry-point load_data \
+  --region us-central1 \
+  --runtime nodejs18 \
+  --trigger-http \
+  --service-account data-pipeline-user@musa-344004.iam.gserviceaccount.com
+
 # Create the workflow...
 gcloud workflows deploy census-pipeline \
   --source src/census_pipeline.yml \
@@ -62,8 +70,10 @@ Some things to note:
   - Invoke functions (`roles/cloudfunctions.invoker` for gen 1 functions, `roles/run.invoker` for gen 2 functions)
   - Invoke workflows (`roles/workflows.invoker`)
   - Read and write data in storage buckets (`roles/storage.objectViewer` and `roles/storage.objectCreator`, or `roles.storage.ObjectAdmin` if you want to overwrite storage objects)
+  - Run BigQuery jobs (`roles/bigquery.jobUser`)
 
 You can find a list of all roles available for the following services at:
 - [Cloud Functions](https://cloud.google.com/functions/docs/reference/iam/roles#standard-roles)
 - [Workflows](https://cloud.google.com/workflows/docs/access-control#roles)
 - [Cloud Storage](https://cloud.google.com/storage/docs/access-control/iam-roles#standard-roles)
+- [BigQuery](https://cloud.google.com/bigquery/docs/access-control#bigquery)
