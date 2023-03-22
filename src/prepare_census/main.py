@@ -13,6 +13,7 @@ def prepare_data(request):
     raw_blob = raw_bucket.blob('census/census_population_2020.json')
     content = raw_blob.download_as_string()
     data = json.loads(content)
+    data[0] = ['name', 'geoid', 'population', 'state', 'county', 'tract', 'block_group']
 
     processed_blob = processed_bucket.blob('census_population_2020/data.csv')
     outfile = io.StringIO()

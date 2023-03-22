@@ -16,3 +16,4 @@ src/processed_data/
 
 # Credentials
 keys/*
+.env

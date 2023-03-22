@@ -12,3 +12,9 @@ main:
             url: https://us-central1-musa-344004.cloudfunctions.net/prepare-census
             auth:
                 type: OIDC
+    - load:
+        call: http.post
+        args:
+            url: https://us-central1-musa-344004.cloudfunctions.net/load-census
+            auth:
+                type: OIDC

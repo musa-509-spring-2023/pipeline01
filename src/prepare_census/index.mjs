@@ -11,6 +11,7 @@ functions.http('prepare_data', async (req, res) => {
   const rawBlob = rawBucket.file('census/census_population_2020.json');
   const [content] = await rawBlob.download();
   const data = JSON.parse(content);
+  data[0] = ['name', 'geoid', 'population', 'state', 'county', 'tract', 'block_group']
 
   console.log(`Writing processed data to bucket: ${processedBucket.name}`);
   const processedBlob = processedBucket.file('census_population_2020/data.csv');

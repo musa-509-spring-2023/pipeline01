@@ -35,6 +35,19 @@ gcloud scheduler jobs [create | update] http census-pipeline-schedule \
   --schedule "0 9 * * 1-5" \
   --uri https://workflowexecutions.googleapis.com/v1/projects/musa-344004/locations/us-central1/workflows/census-pipeline/executions \
   --oauth-service-account-email data-pipeline-user@musa-344004.iam.gserviceaccount.com
+
+# Grant the appropriate roles to the service account...
+gcloud projects add-iam-policy-binding musa-344004 \
+  --member serviceAccount:data-pipeline-user@musa-344004.iam.gserviceaccount.com \
+  --role roles/cloudfunctions.invoker
+
+gcloud projects add-iam-policy-binding musa-344004 \
+  --member serviceAccount:data-pipeline-user@musa-344004.iam.gserviceaccount.com \
+  --role roles/workflows.invoker
+
+gcloud projects add-iam-policy-binding musa-344004 \
+  --member serviceAccount:data-pipeline-user@musa-344004.iam.gserviceaccount.com \
+  --role roles/bigquery.jobUser
 ```
 
 CLI References:
