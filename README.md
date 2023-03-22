@@ -59,8 +59,11 @@ CLI References:
 Some things to note:
 - The scheduler job uses [OAuth](https://en.wikipedia.org/wiki/OAuth) to authenticate in order to run the workflow, whereas the workflow steps use [OIDC (OpenID Connect)](https://en.wikipedia.org/wiki/OpenID#OpenID_Connect_(OIDC)) to authenticate in order to call the functions. The documentation specifies in several places (such as [here](https://cloud.google.com/sdk/gcloud/reference/scheduler/jobs/create/http#--oauth-service-account-email) in the `gcloud scheduler jobs create http` documentation) that OAuth should be used "if the target is a Google APIs service with URL `*.googleapis.com`", whereas OIDC is "generally used *except* for Google APIs hosted on `*.googleapis.com`".
 - The service account should have the appropriate roles to be able to:
-  - Invoke functions
-  - Invoke workflows
-  - Read and write data in storage buckets
-  
-**TODO: Update with specific documentation on which roles are needed**
+  - Invoke functions (`roles/cloudfunctions.invoker` for gen 1 functions, `roles/run.invoker` for gen 2 functions)
+  - Invoke workflows (`roles/workflows.invoker`)
+  - Read and write data in storage buckets (`roles/storage.objectViewer` and `roles/storage.objectCreator`, or `roles.storage.ObjectAdmin` if you want to overwrite storage objects)
+
+You can find a list of all roles available for the following services at:
+- [Cloud Functions](https://cloud.google.com/functions/docs/reference/iam/roles#standard-roles)
+- [Workflows](https://cloud.google.com/workflows/docs/access-control#roles)
+- [Cloud Storage](https://cloud.google.com/storage/docs/access-control/iam-roles#standard-roles)
