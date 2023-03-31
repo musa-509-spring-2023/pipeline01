@@ -1,1 +1,2 @@
 google_cloud_bigquery==3.7.0
+functions-framework==3.3.0

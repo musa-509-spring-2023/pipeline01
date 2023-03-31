@@ -1,26 +1,16 @@
+import pathlib
 from google.cloud import bigquery
 import functions_framework
+
+DIR = pathlib.Path(__file__).parent
 
 
 @functions_framework.http
 def load_data(request):
     client = bigquery.Client()
 
-    sql = """
-        CREATE OR REPLACE EXTERNAL TABLE \`source_data.census_population_2020\` (
-            name STRING,
-            geoid STRING,
-            population INTEGER,
-            state STRING,
-            county STRING,
-            tract STRING,
-            block_group STRING
-        )
-        OPTIONS (
-            sourceUris = ['gs://mjumbewu_musa_509_raw_data/census/census_population_2020.csv'],
-            format = 'CSV'
-        )
-    """
+    with open(DIR / 'create_source_data_census_population_2020.sql') as f:
+        sql = f.read()
     client.query(sql)
 
     return 'OK'
