@@ -9,7 +9,8 @@ functions.http('load_data', async (req, res) => {
   const client = new bigquery.BigQuery();
 
   const sql = await fs.readFile(DIR + 'create_source_data_census_population_2020.sql', 'utf8');
-  await client.query(sql);
+  const queryJob = await client.query(sql);
+  await queryJob.getQueryResults();
 
   res.status(200).send('OK');
 });
