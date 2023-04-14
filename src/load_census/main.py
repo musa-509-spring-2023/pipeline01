@@ -11,6 +11,7 @@ def load_data(request):
 
     with open(DIR / 'create_source_data_census_population_2020.sql') as f:
         sql = f.read()
-    client.query(sql)
+    query_job = client.query(sql)
+    query_job.result()
 
     return 'OK'
